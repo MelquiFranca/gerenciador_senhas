@@ -1,0 +1,51 @@
+
+.corpoExibeDados {
+    position: absolute;
+    background: #FFF;
+    border-radius: 15px;
+    width: 85%;
+    max-width: 600px;
+    min-height: 300px;
+    max-height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    text-align: center;
+    padding: 50px 15px;
+    box-shadow: 0px 0px 10px 2px #BBB;
+
+    animation: crescer 600ms;
+}
+
+.corpoExibeDados h2, h3 {
+    margin-bottom: 15px;
+}
+.editar, .voltar {
+    width: 100%;
+    padding: 10px;
+    height: 55px;
+    border: none;
+    font-size: 18px;
+    margin: 5px 0px;
+    border-radius: 2px;
+    box-shadow: 0px 0px 2px 1px #BBB;
+    cursor: pointer;
+}
+
+.editar { 
+    background: rgb(102, 91, 197);
+    color: #FFF;
+}
+
+.voltar { 
+    background: #FFF;
+}
+
+
+.editar:hover {
+    background: rgb(74, 66, 143);
+}
+
+.voltar:hover {
+    background: #DDD;
+}
