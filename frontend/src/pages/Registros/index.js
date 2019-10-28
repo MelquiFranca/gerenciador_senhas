@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 
 import Dados from '../../components/Dados';
 import BotaoAdicionar from '../../components/BotaoAdicionar';
+import BotaoSair from '../../components/BotaoSair';
+import Logo from '../../components/Logo';
 
 import './style.css';
 
@@ -10,7 +12,7 @@ export default function Registros(props) {
     return (
         <div className="container">
             {!exibe && <div className="corpoForm">
-                <div className="logo">GerPaSS</div>
+                <Logo />
 
                 <ul className="listaRegistros">
                     <li className="topo">
@@ -55,6 +57,7 @@ export default function Registros(props) {
                 setExibe={setExibe}
                 exibe={exibe}
             />}
+            <BotaoSair {...props}/>
             <BotaoAdicionar {...props}/>
 
         </div>

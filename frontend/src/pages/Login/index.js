@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Logo from '../../components/Logo';
 import './styles.css';
 
 export default function Login({ history }) {
@@ -10,7 +11,7 @@ export default function Login({ history }) {
     return (
         <div className="container">
             <div className="corpoForm">
-                <div className="logo">GerPaSS</div>
+                <Logo />
                 <input 
                     type="text" 
                     className="textBox"

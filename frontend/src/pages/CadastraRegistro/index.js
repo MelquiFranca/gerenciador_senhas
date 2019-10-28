@@ -1,12 +1,14 @@
 import React from 'react';
 
 import './style.css';
+import BotaoSair from '../../components/BotaoSair';
+import Logo from '../../components/Logo';
 
-export default function CadastraRegistro({ history }) {
+export default function CadastraRegistro(props) {
     return (
         <div className="container">
             <div className="corpoForm">
-                <div className="logo">GerPaSS</div>
+                <Logo />
                 <input 
                     type="text" 
                     className="textBox"
@@ -30,8 +32,10 @@ export default function CadastraRegistro({ history }) {
                 </select>
 
                 <button className="editar">Registrar Dados de Acesso</button>
-                <button className="voltar" onClick={e => history.push('/registros')}>Voltar</button>
+                <button className="voltar" onClick={e => props.history.push('/registros')}>Voltar</button>
             </div>
+
+            <BotaoSair {...props}/>
         </div>
     );
 }
