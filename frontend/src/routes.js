@@ -11,6 +11,7 @@ export default function Rotas() {
             <Switch>
                 <Route path='/' exact component={Login} />
                 <Route path='/novo' component={CadastraRegistro} />
+                <Route path='/editar/:id' component={CadastraRegistro} />
                 <Route path='/registros' component={Registros} />
             </Switch>
         </BrowserRouter>

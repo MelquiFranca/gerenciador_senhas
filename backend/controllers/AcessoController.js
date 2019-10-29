@@ -1,19 +1,23 @@
-const { Acesso } = require('../database/models/index');
+const { Acesso, Sequelize } = require('../database/models/index');
+const Op = Sequelize.Op;
 
 module.exports = {
     async listar(req, res) {  
         const dados = await Acesso.findAll();
         acessos = dados.map(acs => acs.dataValues);
-        
+
         return res.json(acessos);
     },
     
     async inserir(req, res) {
         const { localAcesso, usuario, password, privacidade } = req.body;
-        
         const dados = await Acesso.findOrCreate({
-            attributes: {localAcesso},
-            default: {
+            where: {
+                [Op.and]: [
+                    {localAcesso: localAcesso}, {usuario: usuario}
+                ]
+            },
+            defaults: {
                 localAcesso,
                 usuario,
                 password,
@@ -41,8 +45,9 @@ module.exports = {
         return res.json(dados);
     },
     async atualizar(req, res) {
+        const {id, localAcesso, usuario, password, privacidade} = req.body;
 
-        const dados = await Acesso.updateOne({
+        const dados = await Acesso.update({
             localAcesso,
             usuario,
             password,

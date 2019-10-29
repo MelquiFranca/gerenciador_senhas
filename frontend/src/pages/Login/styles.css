@@ -32,7 +32,7 @@
 .corpoForm .textBox::placeholder {
     color: #888;
 }
-.corpoForm .textBox {
+.corpoForm .textBox, .corpoExibeDados .textBox{
     border-radius: 2px;
     width: 100%;
     background: #DDD7;
