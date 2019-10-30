@@ -9,7 +9,7 @@ export default function Dados(props) {
     const [acesso, setAcesso] = useState({});
     const [privado, setPrivado] = useState();
     const [senha, setSenha] = useState('');
-    
+
     useEffect(() => {        
         async function carregaDados() {
             const retorno = await api.get(`acessos/${props.id}`);
@@ -25,11 +25,17 @@ export default function Dados(props) {
 
     }, []);
 
-    function handleClickValidar(e) {
+    async function handleClickValidar(e) {
         e.preventDefault();
 
-        if(senha === '123456')
+        const retorno = await api.post('/validaUsuario', {
+            usuario: localStorage.getItem('usuario'),
+            senha 
+        });
+
+        if(retorno.status === 200 && retorno.data.id) {
             setPrivado(false);
+        }
     };
 
     function handleClick(e) {

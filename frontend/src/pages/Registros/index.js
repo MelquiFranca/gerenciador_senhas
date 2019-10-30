@@ -37,7 +37,7 @@ export default function Registros(props) {
     return (
         <div className="container">
             {!exibe && <div className="corpoForm">
-                <Logo />
+                <Logo {...props}/>
 
                 <ul className="listaRegistros">
                     <li className="topo">

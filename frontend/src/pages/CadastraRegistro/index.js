@@ -65,7 +65,7 @@ export default function CadastraRegistro(props) {
     return (
         <div className="container">
             <div className="corpoForm">
-                <Logo />
+                <Logo {...props}/>
                 <input 
                     type="text" 
                     className="textBox"

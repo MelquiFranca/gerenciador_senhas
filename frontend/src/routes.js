@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, BrowserRouter, Switch} from 'react-router-dom';
+import { Route, BrowserRouter, Switch, Redirect} from 'react-router-dom';
 
 import Login from './pages/Login';
 import CadastraRegistro from './pages/CadastraRegistro';
@@ -13,6 +13,7 @@ export default function Rotas() {
                 <Route path='/novo' component={CadastraRegistro} />
                 <Route path='/editar/:id' component={CadastraRegistro} />
                 <Route path='/registros' component={Registros} />
+                <Redirect to="/"/>
             </Switch>
         </BrowserRouter>
     );

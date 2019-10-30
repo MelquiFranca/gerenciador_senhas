@@ -6,20 +6,19 @@ module.exports = {
     async validaSenha(req, res) {
         const { usuario, senha } = req.body;
 
-        const usuario = await Usuario.findOne({
+        const user = await Usuario.findOne({
             where: {usuario}
         });
 
-        if(!usuario) {
+        if(!user) {
             return res.status(400).json({error: "Usuário não existe."});
         }
-        
-        let validacao = false;
-        const senhaCriptografada = crypto.createHmac('sha256', senha).digest('hex');
 
-        if(usuario.senha === senhaCriptografada)
-            validacao = true;
-        
-        return res.json({validacao});
+        const senhaCriptografada = crypto.createHmac('sha256', senha).digest('hex');
+        if(user.senha === senhaCriptografada){
+            return res.json({id: user.id, usuario: user.usuario});
+        }
+        else
+            return res.json(false);
     }
 }
