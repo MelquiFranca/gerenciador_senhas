@@ -67,16 +67,19 @@ export default function CadastraRegistro(props) {
         }    
         
         if(retorno.status === 200)  {
-            limparCampos();
             setMensagem('Registro salvo com sucesso!');
             setExibeMensagem(true);
             setMensagemSucesso(true);
-
+            
             setTimeout(() => {
                 setMensagem('');
                 setExibeMensagem(false);
                 setMensagemSucesso(false);
-            }, 5000);
+                limparCampos();
+                if(props.match.params.id) {
+                    props.history.push('/registros');
+                }
+            }, 1000);
 
         } else {
             setMensagem('Não foi possível salvar no Banco! Tente novamente');

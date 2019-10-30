@@ -17,7 +17,14 @@ export default function Login(props) {
         localStorage.removeItem('usuario');
     }, []);
 
-    async function handleClick() {        
+    async function handleClick() {    
+        
+        if(usuario.length < 1 || senha.length < 1) {
+            setMensagem("Senha ou usuário inválidos! Tente novamente.");
+            setExibeMensagem(true);
+            return null;
+        }
+        
         const retorno = await api.post('/validaUsuario', {
             usuario,
             senha
