@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import BotaoSair from '../../components/BotaoSair';
 import Logo from '../../components/Logo';
+import Mensagem from '../../components/Mensagem';
 
 import api from '../../services/api';
 
@@ -12,6 +13,9 @@ export default function CadastraRegistro(props) {
     const [usuario, setUsuario] = useState('');
     const [password, setPassword] = useState('');
     const [privacidade, setPrivacidade] = useState('');
+    const [exibeMensagem, setExibeMensagem] = useState(false);
+    const [mensagemSucesso, setMensagemSucesso] = useState(false);
+    const [mensagem, setMensagem] = useState('');
 
     function limparCampos() {
         
@@ -38,6 +42,12 @@ export default function CadastraRegistro(props) {
     }, []);
 
     async function handleClick() {
+        if(localAcesso.length < 3 || usuario.length < 3 || password.length < 1 || privacidade === '') {
+            setMensagem('Dados Incompletos! Favor concluir preenchimento.');
+            setExibeMensagem(true);
+            return null;
+        }
+
         let retorno;
         if(props.match.params.id) {
             retorno = await api.put('/acessos', {
@@ -54,16 +64,32 @@ export default function CadastraRegistro(props) {
                 password,
                 privacidade
             }); 
-        }
-        
-        console.log(retorno);
+        }    
         
         if(retorno.status === 200)  {
             limparCampos();
+            setMensagem('Registro salvo com sucesso!');
+            setExibeMensagem(true);
+            setMensagemSucesso(true);
+
+            setTimeout(() => {
+                setMensagem('');
+                setExibeMensagem(false);
+                setMensagemSucesso(false);
+            }, 5000);
+
+        } else {
+            setMensagem('Não foi possível salvar no Banco! Tente novamente');
+            setExibeMensagem(true);
         }
     }
     return (
         <div className="container">
+            <Mensagem 
+                texto={mensagem}
+                visivel={exibeMensagem}
+                sucesso={mensagemSucesso}
+            />
             <div className="corpoForm">
                 <Logo {...props}/>
                 <input 

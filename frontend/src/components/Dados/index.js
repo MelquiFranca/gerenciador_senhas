@@ -3,12 +3,16 @@ import React, { useState, useEffect } from 'react';
 import '../../animations/animacao.css';
 import './style.css';
 
+import Mensagem from '../Mensagem';
+
 import api from '../../services/api';
 
 export default function Dados(props) {
     const [acesso, setAcesso] = useState({});
     const [privado, setPrivado] = useState();
     const [senha, setSenha] = useState('');
+    const [exibeMensagem, setExibeMensagem] = useState(false);
+    const [mensagem, setMensagem] = useState('');
 
     useEffect(() => {        
         async function carregaDados() {
@@ -35,6 +39,11 @@ export default function Dados(props) {
 
         if(retorno.status === 200 && retorno.data.id) {
             setPrivado(false);
+            setExibeMensagem(false);
+            setMensagem('');
+        } else {
+            setExibeMensagem(true);
+            setMensagem('Senha inválida!\n Tente novamente.');
         }
     };
 
@@ -44,7 +53,11 @@ export default function Dados(props) {
     }
     return (
         <>
-        {(!privado) ? <div className="corpoExibeDados">
+            <Mensagem 
+                texto={mensagem}
+                visivel={exibeMensagem}
+            />
+            {(!privado) ? <div className="corpoExibeDados">
                 
                 <h2>{acesso.localAcesso}</h2>
                 <h3>Usuário: {acesso.usuario}</h3>
